@@ -17,32 +17,28 @@ use App\Http\Controllers\PostsController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 Route::prefix('v1')->group(function () {
 
-
+    // Register and login
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
+
+    // Route to create, show all, show detail, update, and delete Categories
 
     Route::apiResource('/categories', CategoriesController::class);
 
 
-    // Categories
-    // create, show all, show detail, update, and delete
 
 
     // Use Token for Authentication to create and get resources
     Route::middleware('auth:api')->group(function () {
 
         // Posts/Articles
-        // create, show all, show detail, update and delete must use token
-        Route::apiResource('/posts', PostsController::class);
+        // Route to create, show all, show detail, update, and delete Posts
+        // Must authenticated by either login or register to get token
+        // Use token Authorization Bearer Token
 
-        // Route::post('/posts/create', [PostsController::class, 'store']);
-        // Route::get('/posts', [PostsController::class, 'index']);
-        // Route::get('/posts/{id}', [PostsController::class, 'show']);
+        Route::apiResource('/posts', PostsController::class);
     });
 });

@@ -16,7 +16,9 @@ class PostsController extends Controller
      */
     public function index()
     {
+        // Show all Posts
         // Use pagination
+
         return PostsResource::collection(Post::paginate(5));
     }
 
@@ -37,6 +39,7 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
+        // Create posts
 
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|max:20',
@@ -90,6 +93,8 @@ class PostsController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        // Update Posts
+
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255',
             'content' => 'required'
@@ -118,6 +123,8 @@ class PostsController extends Controller
      */
     public function destroy(Post $post)
     {
+        // Delete Posts
+
         $post->delete();
         return response()->json([
             'success' => true,

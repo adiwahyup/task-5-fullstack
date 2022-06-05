@@ -16,6 +16,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
+        // Show all categories 
         // Use pagination
         return CategoriesResource::collection(Category::paginate(5));
     }
@@ -37,7 +38,7 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-
+        // Create/store category
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:categories|max:255',
             'user_id' => 'required|max:20'
@@ -65,6 +66,7 @@ class CategoriesController extends Controller
      */
     public function show(Category $category)
     {
+        // Show category detail
         return new CategoriesResource($category);
     }
 
@@ -88,6 +90,9 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+
+        // Update category
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
         ]);
@@ -113,6 +118,8 @@ class CategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
+        // Delete Category
+
         $category->delete();
         return response()->json([
             'success' => true,
